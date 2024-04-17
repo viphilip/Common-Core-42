@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viphilip <viphilip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:20:07 by viphilip          #+#    #+#             */
-/*   Updated: 2024/02/12 11:29:01 by viphilip         ###   ########.fr       */
+/*   Created: 2024/01/23 16:15:39 by viphilip          #+#    #+#             */
+/*   Updated: 2024/01/24 14:08:05 by viphilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	push(t_stack **src, t_stack **dst, char stack)
 {
-	t_list	*tmp;
+	t_stack	*node;
 
-	if (!*lst || !del)
+	if (!(*src))
 		return ;
-	while ((*lst))
-	{
-		tmp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = tmp;
-	}
+	node = *src;
+	*src = (*src)->next;
+	if (*src)
+		(*src)->back = NULL;
+	node->next = *dst;
+	if (*dst)
+		(*dst)->back = node;
+	*dst = node;
+	if (stack == 'a' || stack == 'b')
+		ft_printf("p%c\n", stack);
 }

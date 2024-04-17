@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viphilip <viphilip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:20:07 by viphilip          #+#    #+#             */
-/*   Updated: 2024/02/12 11:29:01 by viphilip         ###   ########.fr       */
+/*   Created: 2024/01/24 13:34:43 by viphilip          #+#    #+#             */
+/*   Updated: 2024/01/24 13:35:12 by viphilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+long long	ft_atol(const char *nptr)
 {
-	t_list	*tmp;
+	long long	nbr;
+	int			sign;
+	int			i;
 
-	if (!*lst || !del)
-		return ;
-	while ((*lst))
+	nbr = 0;
+	sign = 1;
+	i = 0;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		tmp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = tmp;
+		if (nptr[i] == '-')
+			sign *= -1;
+		i++;
 	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		nbr = nbr * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (nbr * sign);
 }

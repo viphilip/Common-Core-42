@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   fill_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viphilip <viphilip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:20:07 by viphilip          #+#    #+#             */
-/*   Updated: 2024/02/12 11:29:01 by viphilip         ###   ########.fr       */
+/*   Created: 2024/01/24 13:36:26 by viphilip          #+#    #+#             */
+/*   Updated: 2024/02/12 11:21:30 by viphilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	fill_stack_a(char **nbr, t_stack **a)
 {
-	t_list	*tmp;
+	size_t	i;
+	t_stack	*buffer;
+	t_stack	*tmp;
 
-	if (!*lst || !del)
-		return ;
-	while ((*lst))
+	i = 0;
+	while (nbr[i])
 	{
-		tmp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = tmp;
+		if (!(*a))
+		{
+			*a = lstnew(atol(nbr[i]));
+			tmp = *a;
+		}
+		else
+		{
+			buffer = *a;
+			(*a)->next = lstnew(atol(nbr[i]));
+			*a = (*a)->next;
+			(*a)->back = buffer;
+		}
+		i++;
 	}
+	*a = tmp;
 }

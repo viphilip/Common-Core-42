@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viphilip <viphilip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:20:07 by viphilip          #+#    #+#             */
-/*   Updated: 2024/02/12 11:29:01 by viphilip         ###   ########.fr       */
+/*   Created: 2024/02/10 14:56:56 by viphilip          #+#    #+#             */
+/*   Updated: 2024/02/10 14:57:17 by viphilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+int	check_error(char **nbr)
 {
-	t_list	*tmp;
+	int	i;
 
-	if (!*lst || !del)
-		return ;
-	while ((*lst))
+	i = 0;
+	while (nbr[i])
 	{
-		tmp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = tmp;
+		if (check_digit(nbr[i]))
+			return (1);
+		else if (check_max(nbr[i]))
+			return (1);
+		i++;
 	}
+	if (check_double(nbr))
+		return (1);
+	return (0);
 }

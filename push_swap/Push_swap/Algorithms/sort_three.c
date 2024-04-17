@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   sort_three.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viphilip <viphilip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:20:07 by viphilip          #+#    #+#             */
-/*   Updated: 2024/02/12 11:29:01 by viphilip         ###   ########.fr       */
+/*   Created: 2024/01/25 15:02:39 by viphilip          #+#    #+#             */
+/*   Updated: 2024/02/09 13:49:50 by viphilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+t_stack	*sort_three(t_stack **a)
 {
-	t_list	*tmp;
+	t_stack	*highest_nbr;
 
-	if (!*lst || !del)
-		return ;
-	while ((*lst))
-	{
-		tmp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = tmp;
-	}
+	highest_nbr = find_highest(*a);
+	if (*a == highest_nbr)
+		rotate(a, 'a');
+	else if ((*a)->next == highest_nbr)
+		rev_rotate(a, 'a');
+	if ((*a)->nbr > (*a)->next->nbr)
+		swap(a, 'a');
+	return (*a);
 }

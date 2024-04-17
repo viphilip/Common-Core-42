@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viphilip <viphilip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:20:07 by viphilip          #+#    #+#             */
-/*   Updated: 2024/02/12 11:29:01 by viphilip         ###   ########.fr       */
+/*   Created: 2024/01/24 13:25:13 by viphilip          #+#    #+#             */
+/*   Updated: 2024/01/24 14:08:13 by viphilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	swap(t_stack **x, char stack)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 
-	if (!*lst || !del)
+	if (!*x || !(*x)->next)
 		return ;
-	while ((*lst))
-	{
-		tmp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = tmp;
-	}
+	tmp = *x;
+	*x = (*x)->next;
+	tmp->next = (*x)->next;
+	(*x)->back = NULL;
+	(*x)->next = tmp;
+	if (stack == 'a' || stack == 'b')
+		ft_printf("s%c\n", stack);
+}
+
+void	swap_all(t_stack **a, t_stack **b)
+{
+	swap(a, 'x');
+	swap(b, 'x');
+	ft_printf("ss\n");
 }
